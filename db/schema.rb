@@ -10,25 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518201555) do
-
-  create_table "charges", force: :cascade do |t|
-    t.decimal "amount"
-    t.integer "credit_card_id"
-    t.date "date"
-  end
-
-  create_table "credit_cards", force: :cascade do |t|
-    t.decimal "current_balance"
-    t.integer "credit_limit"
-    t.decimal "apr"
-    t.date "opening_date"
-  end
-
-  create_table "payments", force: :cascade do |t|
-    t.decimal "amount"
-    t.integer "credit_card_id"
-    t.date "date"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
