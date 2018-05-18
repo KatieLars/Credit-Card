@@ -39,9 +39,13 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rspec-rails'
+  gem 'pry'
+  gem 'factory_bot', '~> 4.8', '>= 4.8.2'
 end
 
 group :development do
+  gem 'database_cleaner'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
