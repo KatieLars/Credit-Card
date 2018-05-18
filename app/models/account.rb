@@ -1,4 +1,4 @@
-class CreditCard < ApplicationRecord
+class Account < ApplicationRecord
   has_many :payments
   has_many :charges
   #apr, current_balance, credit_limit, opening_date
