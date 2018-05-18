@@ -1,2 +1,0 @@
-class CreditCardsController < ApplicationController
-end
