@@ -3,13 +3,14 @@ class Account < ApplicationRecord
   has_many :charges
   #apr, current_balance, credit_limit, opening_date
 
-  def date_from_opening
+  def days_from_opening
     #calculates how many days have passed from opening day from opening date
-    Time.now - self.opening_date
+    
+    #Error: cannot transform Time into integer to do the subtraction
   end
 
   def interest_current_balance #calculates monthly interest
-    if self.date_from_opening < 30 || self.date_from_opening == 30
+    if  < 30 || self.date_from_opening == 30
       @current_balance + self.daily_interest
     else
       @current_balance
