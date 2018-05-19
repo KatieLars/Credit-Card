@@ -15,13 +15,7 @@ class Account < ApplicationRecord
     #this can be used on the account show page to show all transactions
   end
 
-  def time_since_last_transaction
-
-  end
-
-  def interest_calculator #calculator
-
-
+  def total_interest #to be applied at end of month
   end
 
   def payment(amount) #alters current balance (also, a payment instance should be created)
@@ -34,7 +28,8 @@ class Account < ApplicationRecord
     end
   end
 
-  def daily_interest#this needs to deployed ever
+  def daily_interest#this needs to deployed everytime a new transaction happens.
+    #this is how
     @current_balance + (@current_balance * @apr/365*self.time_since_last_transaction)
     #calculates but does not apply daily interest
   end
