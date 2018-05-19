@@ -3,26 +3,28 @@ class Account < ApplicationRecord
   has_many :charges
   #apr, current_balance, credit_limit, opening_date
 
-  def days_from_opening
+  def days_from_opening #returns integer
+    #returns the total days from opening based on when you access the information
     #calculates how many days have passed from opening day from opening date
-    
     #Error: cannot transform Time into integer to do the subtraction
   end
 
-  def interest_current_balance #calculates monthly interest
-    if  < 30 || self.date_from_opening == 30
-      @current_balance + self.daily_interest
-    else
-      @current_balance
-    end
-    #calculates current_balance by using payments, charges, date, apr
-    #should be triggered every time:
-      #--a new Charge is created
-      #--a new Payment is created (payments are always done against principal for first 30 days, then against current_balance)
-      #--30 days have passed
+  def order_activity #orders all activities
+    #returns an array of objects ordered by date
+    #most recent object comes last
+    #this can be used on the account show page to show all transactions
   end
 
-  def payment(amount)
+  def time_since_last_transaction
+
+  end
+
+  def interest_calculator #calculator
+
+
+  end
+
+  def payment(amount) #alters current balance (also, a payment instance should be created)
     @current_balance - amount
   end
 
@@ -32,8 +34,8 @@ class Account < ApplicationRecord
     end
   end
 
-  def daily_interest
-    @current_balance + (@current_balance * @apr)
+  def daily_interest#this needs to deployed ever
+    @current_balance + (@current_balance * @apr/365*self.time_since_last_transaction)
     #calculates but does not apply daily interest
   end
 
