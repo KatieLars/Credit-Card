@@ -1,4 +1,4 @@
-class Charge < ApplicationRecord
+class Transaction < ApplicationRecord
   belongs_to :account
   #consider adding new_balance
   #consider adding a day_number, which marks which day,
@@ -9,10 +9,7 @@ class Charge < ApplicationRecord
     #credit_card_id, over_limit: boolean, interest_accrued
   #over_limit, days_since_last_transaction, new_balance, and interest_accrued are all written here
   def over_limit?
-  end
 
-  def days_since_last_transaction
-    #days since last transaction on this card
   end
 
   def new_balance #the difference between this and current balance is that
@@ -24,7 +21,6 @@ class Charge < ApplicationRecord
   def interest_accrued
     #calculates the interest accrued since last transaction
     #eg. For 10 days, at 500 balance, interest is 500*.35/365*10
-    
   end
 
 

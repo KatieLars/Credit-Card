@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518201555) do
+ActiveRecord::Schema.define(version: 20180521054303) do
 
   create_table "accounts", force: :cascade do |t|
     t.float "current_balance", default: 0.0
@@ -19,16 +19,12 @@ ActiveRecord::Schema.define(version: 20180518201555) do
     t.date "opening_date"
   end
 
-  create_table "charges", force: :cascade do |t|
-    t.float "amount"
+  create_table "transactions", force: :cascade do |t|
     t.integer "credit_card_id"
     t.date "date"
-  end
-
-  create_table "payments", force: :cascade do |t|
     t.float "amount"
-    t.integer "credit_card_id"
-    t.date "date"
+    t.float "new_balance"
+    t.float "interest_accrued"
   end
 
 end

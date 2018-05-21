@@ -15,6 +15,10 @@ class Account < ApplicationRecord
     #this can be used on the account show page to show all transactions
   end
 
+  def days_since_last_transaction
+    #days since last transaction on this card
+  end
+
   def total_interest #to be applied at end of month
   end
 
@@ -22,7 +26,7 @@ class Account < ApplicationRecord
     @current_balance - amount
   end
 
-  def charge(amount)
+  def charge(amount) #alters current balance
     if self.over_limit? != true
       @current_balance + amount
     end
