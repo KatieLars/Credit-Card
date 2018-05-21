@@ -5,7 +5,7 @@ class AccountsController < ApplicationController
   end
 
   def show
-    @account = Account.find_by_id(params[:id])
+    @account = Account.find_by(id: params[:id])
     #shows the entire collection of transaction and account info
   end
 
