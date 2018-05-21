@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'accounts#index'
 
   resources :accounts, only: [:new, :create, :show, :edit, :update]
+  get '/search' => 'accounts#search'
   resources :accounts, only: [:show] do
     resources :transactions, only: [:create, :new]
   end

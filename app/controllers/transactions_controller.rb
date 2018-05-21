@@ -6,8 +6,10 @@ class TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.create(transaction_params)
+    @transaction = Transaction.new(transaction_params)
+    @transaction.account_id = params[:account_id]
     @transaction.date = Date.today
+    binding.pry
     @transaction.balance
     @transaction.interest_accrued
     #add other methods here to fill out Transaction
@@ -17,7 +19,7 @@ class TransactionsController < ApplicationController
   private
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :account_id)
+    params.require(:transaction).permit(:amount)
   end
 
 end
