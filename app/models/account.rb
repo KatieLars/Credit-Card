@@ -2,30 +2,26 @@ class Account < ApplicationRecord
   has_many :transactions
   #apr, current_balance, credit_limit, opening_date
 
-  def days_from_opening #returns integer
-    #returns the total days from opening based on when you access the information
-    #calculates how many days have passed from opening day from opening date
-    #Error: cannot transform Time into integer to do the subtraction
-  end
-
   def total_interest #to be applied at end of month
     #adds up all the interest for all the transactions within one month
+
     self.transactions.sum(:interest_accrued) + self.interest_from_last_transaction
     #remember to add all interest accrued since the last transaction
   end
 
   def interest_from_last_transaction
     last_trans = self.transactions.last
-      interest_rate = @apr/100
+    interest_rate = self.apr/100
     if last_trans #if the last transaction is found
       days = (Date.today.to_date - last_trans.date.to_date).to_i
-      interest_rate = @apr/100
-      @current_balance * interest_rate * days
-    else #if there has been no account activity
-      @current_balance * interest_rate * 29 #monthly, but doesn't count the first day
+      self.current_balance * interest_rate/365 * days
+    else #works
+      self.current_balance * interest_rate/365 * 30 #monthly, but doesn't count the first day
     end
+  end
 
-
+  def total_with_interest #adds balance to interest_from_last_transaction
+    self.current_balance + self.interest_from_last_transaction
   end
 
   def payment(amount) #alters current balance (also, a payment instance should be created)
