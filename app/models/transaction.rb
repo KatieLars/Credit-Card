@@ -23,8 +23,12 @@ class Transaction < ApplicationRecord
 
   def interest_accrued  #calculates the interest accrued since last transaction
     interest_rate = self.account.apr/100
-    previous_balance = self.account.transactions[-2].new_balance
-    self.interest_accrued = previous_balance * interest_rate * self.days_since_last_transaction
+    last_trans = self.account.transactions[-2]
+    if last_trans #if there is a previous transaction
+      self.interest_accrued = last_trans.new_balance * interest_rate * self.days_since_last_transaction
+    else #goes to opening date
+      self.interest_accrued = self.account.current_balance * interest_rate * self.days_since_last_transaction
+    end
     self.save
     #eg. For 10 days, at 500 balance, interest is 500*.35/365*10
   end
