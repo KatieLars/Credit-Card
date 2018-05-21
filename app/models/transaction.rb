@@ -1,6 +1,9 @@
 class Transaction < ApplicationRecord
   belongs_to :account
 
+  after_create :balance
+  after_create :interest
+
   def balance #the difference between this and current balance is that
     #current balance changes every time there is a transaction
     last_trans = self.account.transactions[-2]
