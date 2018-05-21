@@ -3,5 +3,7 @@ Rails.application.routes.draw do
   root 'accounts#index'
 
   resources :accounts, only: [:new, :create, :show, :edit, :update]
-  resources :transactions, only: [:create, :new]
+  resources :accounts, only: [:show] do
+    resources :transactions, only: [:create, :new]
+  end
 end
