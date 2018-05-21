@@ -9,18 +9,24 @@ class Account < ApplicationRecord
   end
 
   def interest_from_last_transaction
+    #calculates what the interest rate was between now and the last transaction
     last_trans = self.transactions.last
     interest_rate = self.apr/100
     if last_trans #if the last transaction is found
       days = (Date.today.to_date - last_trans.date.to_date).to_i
-      self.current_balance * interest_rate/365 * days
+      last_trans.new_balance * interest_rate/365 * days
     else #works
       self.current_balance * interest_rate/365 * 30 #monthly, but doesn't count the first day
     end
   end
 
   def total_with_interest #adds balance to interest_from_last_transaction
-    self.current_balance + self.interest_from_last_transaction
+    last_trans = self.transactions.last
+    if last_trans
+      last_trans.new_balance + total_interest
+    else #if there had been no last transaction
+      self.current_balance + self.interest_from_last_transaction
+    end
   end
 
   def payment(amount) #alters current balance (also, a payment instance should be created)

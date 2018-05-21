@@ -1,13 +1,5 @@
 class Transaction < ApplicationRecord
   belongs_to :account
-  #consider adding new_balance
-  #consider adding a day_number, which marks which day,
-  #since the last transaction
-  #consider making Charge and Payment classes one class
-
-  #ex. Transaction: date, days_since_last_transaction, new_balance, amount, date
-    #credit_card_id, over_limit: boolean, interest_accrued
-  #over_limit, days_since_last_transaction, new_balance, and interest_accrued are all written here
 
   def balance #the difference between this and current balance is that
     #current balance changes every time there is a transaction
@@ -25,9 +17,10 @@ class Transaction < ApplicationRecord
     interest_rate = self.account.apr/100
     last_trans = self.account.transactions[-2]
     if last_trans #if there is a previous transaction
-      self.interest_accrued = last_trans.new_balance * interest_rate * self.days_since_last_transaction
+      self.interest_accrued = last_trans.new_balance * interest_rate/365 * self.days_since_last_transaction
     else #goes to opening date
-      self.interest_accrued = self.account.current_balance * interest_rate * self.days_since_last_transaction
+      #works
+      self.interest_accrued = self.account.current_balance * interest_rate/365 * self.days_since_last_transaction
     end
     self.save
     #eg. For 10 days, at 500 balance, interest is 500*.35/365*10
