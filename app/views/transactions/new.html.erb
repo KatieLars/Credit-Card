@@ -5,6 +5,7 @@
     <%=form_tag("/create", method: "POST") do %>
       <%=label_tag(:amount, "Amount")%>
       <%=text_field_tag(:amount)%>
+      <%=hidden_field_tag("account_id", @account.id)%>
       <%=submit_tag("Submit")%>
     <%end%>
 </div>

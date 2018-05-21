@@ -5,17 +5,13 @@ class AccountsController < ApplicationController
   end
 
   def show
+    @account = Account.find_by_id(params[:id])
     #shows the entire collection of transaction and account info
   end
 
   def create
     @account = Account.create(apr: 35, opening_date: Date.today, credit_limit: 1000)
-    render 'show'
+    redirect_to @account
   end
-
-  def new
-    #open a new account
-  end
-
 
 end
