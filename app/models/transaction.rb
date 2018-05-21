@@ -8,22 +8,18 @@ class Transaction < ApplicationRecord
   #ex. Transaction: date, days_since_last_transaction, new_balance, amount, date
     #credit_card_id, over_limit: boolean, interest_accrued
   #over_limit, days_since_last_transaction, new_balance, and interest_accrued are all written here
-  def over_limit?
 
-  end
-
-  def new_balance #the difference between this and current balance is that
+  def balance #the difference between this and current balance is that
     #current balance changes every time there is a transaction
     last_trans = self.account.transactions[-2]
-    if last_trans #if there is a last transaction
+    if last_trans.new_balance #if there is a last transaction
       last_trans.new_balance + @amount
     else #otherwise goes straight to the current balance
       self.account.current_balance + @amount
     end
   end
 
-  def interest_accrued
-    #calculates the interest accrued since last transaction
+  def interest_accrued  #calculates the interest accrued since last transaction
     interest_rate = self.account.apr/100
     previous_balance = self.account.transactions[-2].new_balance
     previous_balance * interest_rate * self.days_since_last_transaction
@@ -36,7 +32,8 @@ class Transaction < ApplicationRecord
     if last_date #if there is a previous transaction
       (self.date.to_date - last_date.to_date).to_i
     else
-      (self.date.to_date - self.account.opening_date.to_date).to_i + 1
+      (self.date.to_date - self.account.opening_date.to_date).to_i - 1
+      #-1 is to accomodate for opening day being interest free
     end
   end
 

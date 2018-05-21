@@ -8,18 +8,24 @@ class Account < ApplicationRecord
     #Error: cannot transform Time into integer to do the subtraction
   end
 
-  def order_activity #orders all activities
-
-    #returns an array of objects ordered by date
-    #most recent object comes last
-    #this can be used on the account show page to show all transactions
-  end
-
-  def days_since_last_transaction
-    #days since last transaction on this card
-  end
-
   def total_interest #to be applied at end of month
+    #adds up all the interest for all the transactions within one month
+    self.transactions.sum(:interest_accrued) + self.interest_from_last_transaction
+    #remember to add all interest accrued since the last transaction
+  end
+
+  def interest_from_last_transaction
+    last_trans = self.transactions.last
+      interest_rate = @apr/100
+    if last_trans #if the last transaction is found
+      days = (Date.today.to_date - last_trans.date.to_date).to_i
+      interest_rate = @apr/100
+      @current_balance * interest_rate * days
+    else #if there has been no account activity
+      @current_balance * interest_rate * 29 #monthly, but doesn't count the first day
+    end
+
+
   end
 
   def payment(amount) #alters current balance (also, a payment instance should be created)
