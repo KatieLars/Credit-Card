@@ -1,11 +1,13 @@
 class TransactionsController < ApplicationController
 
   def new
+    @account = Account.find_by(id: params[:account_id])
+    @transaction = Transaction.new
   end
 
   def create
-    binding.pry
-    @transaction = Transaction.create(amount: params[:amount], date: Date.today, account_id: params[:account_id] )
+    @transaction = Transaction.create(transaction_params)
+    @transaction.date = Date.today
     @transaction.balance
     @transaction.interest_accrued
     #add other methods here to fill out Transaction
