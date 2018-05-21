@@ -1,11 +1,10 @@
 <div>
-  <h1>Payment or Charge</p>
+  <h1>Payment or Charge</h1>
   <p>If making a payment, please enter the amount as a negative number.
     eg. Enter a $100 payment as -100</p>
     <%=form_tag(action: "create", method: "POST") do %>
       <%=label_tag(:amount, "Amount")%>
       <%=text_field_tag(:amount)%>
-      <%=hidden_field_tag("account_id", @account.id)%>
       <%=submit_tag("Submit")%>
     <%end%>
 </div>
