@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180521054303) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "credit_card_id"
+    t.integer "account_id"
     t.date "date"
     t.float "amount"
     t.float "new_balance"

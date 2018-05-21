@@ -12,18 +12,21 @@ class Transaction < ApplicationRecord
 
   end
 
-  def new_balance #the difference between this and current balance is that
+  def new_balance(amount) #the difference between this and current balance is that
     #current balance changes every time there is a transaction
-    #new_balance records the new balance after every transaction and is a part of the record
-    #of that transaction
+    last_trans = self.account.transactions.last
+    if last_trans #if there is a last transaction
+      last_trans.new_balance + amount
+    else #otherwise goes straight to the current balance
+      self.account.current_balance + amount
+    end
   end
 
   def interest_accrued
     #calculates the interest accrued since last transaction
+    self.account.transactions
     #eg. For 10 days, at 500 balance, interest is 500*.35/365*10
   end
-
-
 
   def interest_calculator #calculates the interest for each transaction
 
