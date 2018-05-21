@@ -9,5 +9,6 @@
       <%=@account.current_balance%>
     <%end%>
     </p>
+  <p>Total Accrued Interest: <%=@account.total_interest%></p>
   <%=link_to "Make a transaction", new_account_transaction_path(@account)%>
 </div>

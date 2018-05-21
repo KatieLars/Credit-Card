@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
 
   def show
     @account = Account.find_by(id: params[:id])
-    #shows the entire collection of transaction and account info
   end
 
   def create
