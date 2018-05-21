@@ -4,7 +4,6 @@ class Account < ApplicationRecord
 
   def total_interest #to be applied at end of month
     #adds up all the interest for all the transactions within one month
-
     self.transactions.sum(:interest_accrued) + self.interest_from_last_transaction
     #remember to add all interest accrued since the last transaction
   end
