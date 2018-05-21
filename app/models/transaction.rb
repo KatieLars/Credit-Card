@@ -29,9 +29,9 @@ class Transaction < ApplicationRecord
 
 
   def days_since_last_transaction #returns an integer
-    last_date = self.account.transactions[-2]
-    if last_date #if there is a previous transaction
-      (self.date.to_date - last_date.date.to_date).to_i
+    last_trans = self.account.transactions[-2]
+    if last_trans && last_trans != self #if there is a previous transaction
+      (self.date.to_date - last_trans.date.to_date).to_i
     else #this works
       (self.date.to_date - self.account.opening_date.to_date).to_i
       #-1 is to accomodate for opening day being interest free

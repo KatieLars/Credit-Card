@@ -23,15 +23,17 @@ end
 
 describe ":interest_from_last_transaction" do
   it "calculates the total interest from today to the date of the last transaction" do
+    binding.pry
     last_trans_interest = @account.interest_from_last_transaction.round(2)
     expect(last_trans_interest).to eq(1.92)
   end
 end
 
 describe ":total_interest"
-it "calculates the total interest of all transactions" do
-  all_interest = @account.total_interest.round(2)
-  expect(all_interest).to eq(11.99)
+  it "calculates the total interest of all transactions" do
+    all_interest = @account.total_interest.round(2)
+    expect(all_interest).to eq(11.99)
+  end
 end
 
 describe ":total_with_interest" do
@@ -39,7 +41,6 @@ describe ":total_with_interest" do
       total_owed = @account.total_with_interest.round(2)
       expect(total_owed).to eq(411.99)
   end
-
 end
 
 end

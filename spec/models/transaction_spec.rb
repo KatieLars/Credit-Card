@@ -26,11 +26,13 @@ end
 
 describe "balance" do
   it "updates the balance based on amount deposited/charged for first transaction" do
+
       @first_transaction.balance
       expect(@first_transaction.new_balance).to eq(@account.current_balance + @first_transaction.amount)
   end
 
   it "updates the balance based on amount deposited/charged for second transaction" do
+    @first_transaction.balance
     @second_transaction.balance
     expect(@second_transaction.new_balance).to eq(@first_transaction.new_balance + @second_transaction.amount)
   end
