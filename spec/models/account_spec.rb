@@ -35,15 +35,11 @@ it "calculates the total interest of all transactions" do
 end
 
 describe ":total_with_interest" do
-  it "" do
-      updated_balance = @first_transaction.balance
-      expect(updated_balance).to eq(@account.current_balance + @first_transaction.amount)
+  it "adds total interest to last balance" do
+      total_owed = @account.total_with_interest.round(2)
+      expect(total_owed).to eq(411.99)
   end
 
-  it "updates the balance based on amount deposited/charged for second transaction" do
-    second_update = @second_transaction.balance
-    expect(second_update).to eq(@first_transaction.new_balance + @second_transaction.amount)
-  end
 end
 
 end
