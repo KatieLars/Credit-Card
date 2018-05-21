@@ -3,5 +3,5 @@
   <p>Apr:<%=@account.apr%></p>
   <p>Credit Limit: <%=@account.credit_limit%></p>
   <p>Outstanding Balance: <%=@account.transactions.last.new_balance || @account.current_balance%></p>
-  <%=button_to "Make a transaction", action: "show", method: "GET"%>
+  <%=button_to "Make a transaction", action: "new", method: "GET"%>
 </div>
