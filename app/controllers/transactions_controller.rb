@@ -10,7 +10,7 @@ class TransactionsController < ApplicationController
     @transaction.account_id = params[:account_id]
     @transaction.date = Date.today
     @transaction.balance
-    @transaction.interest_accrued
+    @transaction.interest
     redirect_to account_path(@transaction.account)
   end
 

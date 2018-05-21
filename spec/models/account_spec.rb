@@ -8,12 +8,12 @@ RSpec.describe Account, type: :model do
   @first_transaction = @account.transactions.build(amount: -200)
   @first_transaction.date = @account.opening_date.days_since(15)
   @first_transaction.balance
-  @first_transaction.interest_accrued
+  @first_transaction.interest
   @first_transaction.save
   @second_transaction = @account.transactions.build(amount: 100)
   @second_transaction.date = @account.opening_date.days_since(25)
   @second_transaction.balance
-  @second_transaction.interest_accrued
+  @second_transaction.interest
   @second_transaction.save
 end
 

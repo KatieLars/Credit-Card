@@ -4,8 +4,8 @@ class Transaction < ApplicationRecord
   def balance #the difference between this and current balance is that
     #current balance changes every time there is a transaction
     last_trans = self.account.transactions[-2]
-    
-    if last_trans #if there is a last transaction
+    if last_trans && last_trans != self
+      #if there is a last transaction, and that is not the same as the self
       self.new_balance = last_trans.new_balance + self.amount
     else #otherwise goes straight to the current balance
       #works
@@ -14,10 +14,10 @@ class Transaction < ApplicationRecord
     self.save
   end
 
-  def interest_accrued  #calculates the interest accrued since last transaction
+  def interest  #calculates the interest accrued since last transaction
     interest_rate = self.account.apr/100
     last_trans = self.account.transactions[-2]
-    if last_trans #if there is a previous transaction
+    if last_trans && last_trans != self #if there is a previous transaction
       self.interest_accrued = last_trans.new_balance * interest_rate/365 * self.days_since_last_transaction
     else #goes to opening date
       #works
