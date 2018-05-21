@@ -4,6 +4,7 @@ class Transaction < ApplicationRecord
   def balance #the difference between this and current balance is that
     #current balance changes every time there is a transaction
     last_trans = self.account.transactions[-2]
+    
     if last_trans #if there is a last transaction
       self.new_balance = last_trans.new_balance + self.amount
     else #otherwise goes straight to the current balance
