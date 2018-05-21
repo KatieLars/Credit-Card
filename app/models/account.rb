@@ -2,10 +2,9 @@ class Account < ApplicationRecord
   has_many :transactions
   #apr, current_balance, credit_limit, opening_date
 
-  def total_interest #to be applied at end of month
+  def total_interest 
     #adds up all the interest for all the transactions within one month
     self.transactions.sum(:interest_accrued) + self.interest_from_last_transaction
-    #remember to add all interest accrued since the last transaction
   end
 
   def interest_from_last_transaction
@@ -39,10 +38,8 @@ class Account < ApplicationRecord
     end
   end
 
-  def daily_interest#this needs to deployed everytime a new transaction happens.
-    #this is how
-    @current_balance + (@current_balance * @apr/365*self.time_since_last_transaction)
-    #calculates but does not apply daily interest
+  def daily_interest #interest earned today based on balance
+    @current_balance * @apr/365
   end
 
   def over_limit?(amount) #returns true of charge puts current_balance over limit
