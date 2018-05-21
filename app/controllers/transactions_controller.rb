@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.create(amount: params[:amount], date: Date.today)
-
+    #add other methods here to fill out Transaction
     redirect_to account_path(@transaction.account_id)
   end
 
