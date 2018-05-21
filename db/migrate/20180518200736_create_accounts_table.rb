@@ -4,7 +4,7 @@ class CreateAccountsTable < ActiveRecord::Migration[5.1]
       t.float :current_balance, :default => 0
       t.integer :credit_limit
       t.float :apr
-      t.date :opening_date, :default => Time.now
+      t.date :opening_date
       t.timestamp
     end
   end

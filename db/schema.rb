@@ -16,19 +16,19 @@ ActiveRecord::Schema.define(version: 20180518201555) do
     t.float "current_balance", default: 0.0
     t.integer "credit_limit"
     t.float "apr"
-    t.date "opening_date", default: "2018-05-18"
+    t.date "opening_date"
   end
 
   create_table "charges", force: :cascade do |t|
     t.float "amount"
     t.integer "credit_card_id"
-    t.date "date", default: "2018-05-18"
+    t.date "date"
   end
 
   create_table "payments", force: :cascade do |t|
     t.float "amount"
     t.integer "credit_card_id"
-    t.date "date", default: "2018-05-18"
+    t.date "date"
   end
 
 end
