@@ -9,5 +9,5 @@
       <%=@account.current_balance%>
     <%end%>
     </p>
-  <%=button_to "Make a transaction", action: "new", controller: "transactions", method: "GET"%>
+  <%=button_to "Make a transaction", new_account_transaction_path(@account), method: "GET"%>
 </div>
