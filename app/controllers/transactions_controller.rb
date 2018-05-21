@@ -9,11 +9,10 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @transaction.account_id = params[:account_id]
     @transaction.date = Date.today
-    binding.pry
     @transaction.balance
     @transaction.interest_accrued
     #add other methods here to fill out Transaction
-    redirect_to account_path(@transaction.account_id)
+    redirect_to account_path(@transaction.account)
   end
 
   private

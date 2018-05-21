@@ -1,7 +1,7 @@
 <div>
   <h1>Welcome!</h1>
 
-  <%=form_tag(action: "/search" method: "GET") do %>
+  <%=form_tag(search_path, method: "GET") do %>
     <%=label_tag(:id, "Enter an account id")%>
     <%=text_field_tag(:id)%>
     <%=submit_tag("Submit")%>

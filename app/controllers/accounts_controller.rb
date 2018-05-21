@@ -5,7 +5,8 @@ class AccountsController < ApplicationController
   end
 
   def search
-    binding.pry
+    @account = Account.find_by(id: params[:id])
+    redirect_to account_path(@account)
   end
 
   def show
