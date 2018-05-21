@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
 
   def create
     @account = Account.create(apr: 35, opening_date: Date.today, credit_limit: 1000)
-    #creates new account
+    render 'show'
   end
 
   def new
